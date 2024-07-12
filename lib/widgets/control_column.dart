@@ -25,9 +25,9 @@ final class ControlColumn extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final colVariant = switch (variant) {
-      ControlColumnVariant.idle => _IdleColumn(onStart: onStart, key: ValueKey('1')),
-      ControlColumnVariant.running => _RunningColumn(onStart: onStart, onLap: onLap, key: ValueKey('2')),
-      ControlColumnVariant.paused => _PausedColumn(onStart: onStart, onLap: onLap, onStop: onStop, key: ValueKey('3'))
+      ControlColumnVariant.idle => _IdleColumn(onStart: onStart, key: const ValueKey('1')),
+      ControlColumnVariant.running => _RunningColumn(onPause: onPause, onLap: onLap, key: const ValueKey('2')),
+      ControlColumnVariant.paused => _PausedColumn(onStart: onStart, onLap: onLap, onStop: onStop, key: const ValueKey('3'))
     };
 
     final config = ControlColumnProvider.configOf(context);
@@ -63,8 +63,8 @@ final class ControlColumnProvider extends InheritedWidget {
   }
 
   @override
-  bool updateShouldNotify(ControlColumnProvider old) {
-    return old.config != config;
+  bool updateShouldNotify(ControlColumnProvider oldWidget) {
+    return oldWidget.config != config;
   }
 }
 
@@ -104,9 +104,9 @@ final class _IdleColumn extends StatelessWidget {
 }
 
 final class _RunningColumn extends StatelessWidget {
-  const _RunningColumn({super.key, required this.onStart, required this.onLap});
+  const _RunningColumn({super.key, required this.onPause, required this.onLap});
 
-  final VoidCallback? onStart;
+  final VoidCallback? onPause;
   final VoidCallback? onLap;
 
   @override
@@ -118,7 +118,7 @@ final class _RunningColumn extends StatelessWidget {
       children: [
         _Small(child: ActionButton.lap(onPressed: onLap)),
         const SizedBox(height: 15),
-        _Large(child: ActionButton.start(onPressed: onStart)),
+        _Large(child: ActionButton.pause(onPressed: onPause)),
       ],
     );
   }
@@ -142,7 +142,7 @@ final class _PausedColumn extends StatelessWidget {
         const SizedBox(height: 15),
         _Small(child: ActionButton.lap(onPressed: onLap)),
         const SizedBox(height: 15),
-        _Large(child: ActionButton.stop(onPressed: onStop)),
+        _Large(child: ActionButton.reset(onPressed: onStop)),
       ],
     );
   }
@@ -206,8 +206,4 @@ class _Small extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(width: 40, height: 40, child: child);
   }
-}
-
-extension _SizingExtension on ActionButton {
-  Widget get doubleSize => _Large(child: this);
 }

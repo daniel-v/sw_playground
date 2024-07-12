@@ -10,7 +10,7 @@ Widget startButtonUseCase(BuildContext context) {
 
 @widgetbook.UseCase(name: 'stop', type: ActionButton)
 Widget stopButtonUseCase(BuildContext context) {
-  return const ActionButton.stop();
+  return const ActionButton.reset();
 }
 
 @widgetbook.UseCase(name: 'pause', type: ActionButton)

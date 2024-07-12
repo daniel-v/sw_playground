@@ -36,6 +36,14 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.6
   intl:
+  rxdart:
+  async:
+  flutter_riverpod: ^2.5.1
+  riverpod_annotation: ^2.3.5
+  logging:
+  freezed_annotation: ^2.4.3
+  json_annotation: ^4.9.0
+  collection:
 
 dev_dependencies:
   flutter_test:
@@ -47,17 +55,33 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^3.0.0
+  riverpod_generator: ^2.4.0
+  build_runner: ^2.4.11
+  custom_lint: ^0.6.4
+  riverpod_lint: ^2.3.10
+  freezed: ^2.5.2
+  json_serializable: ^6.8.0
+  test:
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
 # The following section is specific to Flutter packages.
 flutter:
-
-  # The following line ensures that the Material Icons font is
-  # included with your application, so that you can use the icons in
-  # the material Icons class.
   uses-material-design: true
+
+  # Should use Source Sans Pro but was unavailable to me at the time
+  fonts:
+    - family: SourceSans3
+      fonts:
+        - asset: assets/SourceSans3-Regular.ttf
+        - asset: assets/SourceSans3-Medium.ttf
+          weight: 700
+    - family: B612
+      fonts:
+        - asset: assets/B612Mono-Regular.ttf
+        - asset: assets/B612Mono-Bold.ttf
+          weight: 700
 
   # To add assets to your application, add an assets section, like this:
   # assets:
